@@ -62,7 +62,7 @@ script:
   - autopep8 -r . --diff | tee check_autopep8
   - test ! -s check_autopep8
   - pushd tests
-  - # pytest -m "not slow and not gpu and not cudnn and not ideep" chainer_tests
+  - pytest -m "not slow and not gpu and not cudnn and not ideep" chainer_tests
   - export OMP_NUM_THREADS=1
   - (for NP in 1 2; do mpiexec -n ${NP} pytest -s -v -m 'not gpu and not slow' chainermn_tests || exit $?; done)
   - popd
